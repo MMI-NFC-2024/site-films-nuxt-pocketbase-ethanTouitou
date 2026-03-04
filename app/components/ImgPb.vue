@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import type { BaseModel } from "pocketbase";
 
 const props = defineProps<{
   /** L'enregistrement 'complet' (id et collectionId ou collectionName) de PocketBase */

@@ -8,7 +8,9 @@ const NuxtApp = useNuxtApp();
 <template>
     <div>
         <h1>{{ film.titre }}</h1>
-        
+        <ImgPb :record="film" :filename="film.affiche"/>
+        <p v-html="film.synopsis"></p>
+
     </div>
 
 </template>
