@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import Multiselect from '@vueform/multiselect';
 const film = ref({} as FilmsResponse)
 const nuxtApp = useNuxtApp()
 const route = useRoute()
@@ -10,6 +11,8 @@ if (id){
     dete_de_sortie: (new Date(film_temp.dete_de_sortie)).toISOString().split('T')[0]!
    }
 }
+const personnes = await nuxtApp.$pb.collection('Personne').getFullList()
+
 async function envoyerLeFilm(){
     const filmAjouté = id
         ?(await nuxtApp.$pb.collection("Films").update(id,film.value))
@@ -55,10 +58,25 @@ function createObjectURL(fichier:File){
 <label>Date
         <input type="date" v-model="film.dete_de_sortie">
     </label> 
-<label > 
-    <SelectPersonnes v-model="film."
+<label >producteur 
+    <Multiselect
+                v-model="film.producteur"
+                :options="personnes"
+                label="nom"
+                value-prop="id"
+              />
+</label>
+<label >realisateur
+    <Multiselect
+                v-model="film.realisateurs"
+                mode="tags"
+                :options="personnes"
+                label="nom"
+                value-prop="id"
+              />
 </label>
     <button>Envoyer</button>
 </form>
 
 </template>
+<style src="@vueform/multiselect/themes/default.css"></style>
