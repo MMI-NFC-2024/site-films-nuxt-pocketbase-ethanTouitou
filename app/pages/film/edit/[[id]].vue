@@ -28,15 +28,15 @@ function createObjectURL(fichier:File){
 <template>
 
 <form @submit.prevent="envoyerLeFilm">
-    <div v-if="film.affiche">
-        <ImgPb v-if="typeof film.affiche === 'string'"  :record="film" :filename="film.affiche"/>
-        <img v-else :src="createObjectURL(film.affiche)" alt="">
-        <button @click.prevent="film.affiche = ''">Supprimer l'image</button>
+    <div v-if="film.photo">
+        <ImgPb v-if="typeof film.photo === 'string'"  :record="film" :filename="film.photo"/>
+        <img v-else :src="createObjectURL(film.photo)" alt="">
+        <button @click.prevent="film.photo = ''">Supprimer l'image</button>
 
     </div>
     <label v-else>Choisir un fichier
         <input type="file" 
-        @change="film.affiche = ($event.target as HTMLInputElement)?.files?.[0]"/>
+        @change="film.photo = ($event.target as HTMLInputElement)?.files?.[0]"/>
     </label>
     <label>titre
         <input type="text" v-model="film.titre">
@@ -55,7 +55,9 @@ function createObjectURL(fichier:File){
 <label>Date
         <input type="date" v-model="film.dete_de_sortie">
     </label> 
-
+<label > 
+    <SelectPersonnes v-model="film."
+</label>
     <button>Envoyer</button>
 </form>
 

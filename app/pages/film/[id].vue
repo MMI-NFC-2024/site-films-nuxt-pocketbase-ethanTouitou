@@ -8,7 +8,7 @@ const NuxtApp = useNuxtApp();
 <template>
     <div>
         <h1>{{ film.titre }}</h1>
-        <ImgPb :record="film" :filename="film.affiche"/>
+        <ImgPb :record="film" :filename="film.photo"/>
         <p v-html="film.synopsis"></p>
     </div>
  <NuxtLink :to="{name: 'film-edit-id', params: {id}}">Editer le film</NuxtLink>

@@ -7,9 +7,9 @@ const NuxtApp = useNuxtApp();
 
 <template>
     <div>
-        <h1>{{ personne.titre }}</h1>
-        <ImgPb :record="personne" :filename="personne.affiche"/>
-        <p v-html="personne.synopsis"></p>
+        <h1>{{ personne.nom }} {{ personne.prenom }}</h1>
+        <ImgPb :record="personne" :filename="personne.photo"/>
+        <p v-html="personne.proffession"></p>
     </div>
- <NuxtLink :to="{name: 'film-edit-id', params: {id}}">Editer le film</NuxtLink>
+ <NuxtLink :to="{name: 'personnes-edit-id', params: {id}}">Editer la personne</NuxtLink>
 </template>

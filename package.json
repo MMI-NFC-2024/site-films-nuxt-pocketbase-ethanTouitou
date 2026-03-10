@@ -11,6 +11,7 @@
     "type": "npx pocketbase-typegen --db ./backend/pb_data/data.db --out ./app/utils/pocketbase-types.ts"
   },
   "dependencies": {
+    "@vueform/multiselect": "^2.6.11",
     "nuxt": "^4.3.1",
     "nuxt-typed-router": "^4.0.7",
     "pocketbase": "^0.26.8",
