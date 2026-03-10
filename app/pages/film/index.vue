@@ -1,6 +1,7 @@
 <script setup lang="ts">
     const NuxtApp = useNuxtApp();
     const films = await NuxtApp.$pb.collection('Films').getFullList();
+    const addFilmRoute = { name: 'film-edit-id' as const };
 </script>
 
 <template>
@@ -10,4 +11,6 @@
             <NuxtLink :to="{name:'film-id', params:{id:film.id}}">{{ film.titre }}</NuxtLink>
         </li>
     </ul>
+    <NuxtLink :to="addFilmRoute">Ajouter un film</NuxtLink>
+
 </template>

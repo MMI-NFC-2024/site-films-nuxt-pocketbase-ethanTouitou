@@ -2,7 +2,8 @@
 import PocketBase from 'pocketbase';
 
 export default defineNuxtPlugin(async () => {
-    const pb = new PocketBase('http://127.0.0.1:8090') as TypedPocketBase;
+    const config = useRuntimeConfig()
+    const pb = new PocketBase(config.public.pocketbaseUrl) as TypedPocketBase;
 
     const cookie = useCookie('pb_auth', {
         path: '/',
@@ -13,12 +14,10 @@ export default defineNuxtPlugin(async () => {
     })
 
     // load the store data from the cookie value
-    // @ts-ignore
     pb.authStore.save(cookie.value?.token, cookie.value?.record);
 
     // send back the default 'pb_auth' cookie to the client with the latest store state
     pb.authStore.onChange(() => {
-        // @ts-ignore
         cookie.value = {
             token: pb.authStore.token,
             record: pb.authStore.record,
@@ -33,7 +32,14 @@ export default defineNuxtPlugin(async () => {
         pb.authStore.clear();
     }
 
+    // valeur réactive reflettant l'utilisateur
+    const user = ref<UsersResponse | null>(null)
+    pb.authStore.onChange((token, record) => {
+        console.log({ token, record });
+        user.value = record as UsersResponse
+    })
+
     return {
-        provide: { pb }
+        provide: { pb, user }
     }
 });
